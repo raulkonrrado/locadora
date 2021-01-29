@@ -20,7 +20,7 @@ public class ClienteDAO {
 		PreparedStatement stmt = null;
 		
 		try {
-			stmt = con.prepareStatement("INSERT INTO CLIENTE (nome, cpf, endereço, EstadoCivil) VALUES"
+			stmt = con.prepareStatement("INSERT INTO CLIENTE (nome, email, sexo) VALUES"
 					+ "(?,?,?)");
 			stmt.setString(1, c.getNome());
 			stmt.setString(2, c.getEmail());

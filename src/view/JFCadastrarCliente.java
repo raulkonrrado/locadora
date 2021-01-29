@@ -47,7 +47,7 @@ public class JFCadastrarCliente extends JFrame {
 	 * Create the frame.
 	 */
 	public JFCadastrarCliente() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -86,12 +86,12 @@ public class JFCadastrarCliente extends JFrame {
 		
 		JRadioButton rdbtnFeminino = new JRadioButton("Feminino");
 		rdbtnFeminino.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		rdbtnFeminino.setBounds(74, 134, 79, 23);
+		rdbtnFeminino.setBounds(163, 134, 79, 23);
 		contentPane.add(rdbtnFeminino);
 		
 		JRadioButton rdbtnMasculino = new JRadioButton("Masculino");
 		rdbtnMasculino.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		rdbtnMasculino.setBounds(155, 134, 87, 23);
+		rdbtnMasculino.setBounds(74, 134, 87, 23);
 		contentPane.add(rdbtnMasculino);
 		
 		ButtonGroup sexo = new ButtonGroup();
@@ -99,13 +99,25 @@ public class JFCadastrarCliente extends JFrame {
 		sexo.add(rdbtnMasculino);
 		
 		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtNome.setText(null);
+				txtEmail.setText(null);
+				sexo.clearSelection();
+			}
+		});
 		btnLimpar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnLimpar.setBounds(244, 210, 89, 30);
+		btnLimpar.setBounds(225, 210, 89, 30);
 		contentPane.add(btnLimpar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnCancelar.setBounds(143, 210, 89, 30);
+		btnCancelar.setBounds(126, 210, 89, 30);
 		contentPane.add(btnCancelar);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
@@ -125,9 +137,10 @@ public class JFCadastrarCliente extends JFrame {
 				}
 				
 				dao.create(c);
+				dispose();
 			}
 		});
-		btnCadastrar.setBounds(21, 210, 109, 30);
+		btnCadastrar.setBounds(10, 210, 109, 30);
 		contentPane.add(btnCadastrar);
 	   
 	}

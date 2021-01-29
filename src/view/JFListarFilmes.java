@@ -18,6 +18,8 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowFocusListener;
+import java.awt.event.WindowEvent;
 
 public class JFListarFilmes extends JFrame {
 
@@ -44,8 +46,15 @@ public class JFListarFilmes extends JFrame {
 	 */
 	
 	public JFListarFilmes() {
+		addWindowFocusListener(new WindowFocusListener() {
+			public void windowGainedFocus(WindowEvent arg0) {
+				readJTable();
+			}
+			public void windowLostFocus(WindowEvent arg0) {
+			}
+		});
 		setTitle("Listar Filmes");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 691, 421);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -67,6 +76,13 @@ public class JFListarFilmes extends JFrame {
 		scrollPane.setViewportView(jtFilme);
 		
 		JButton btnCadastrar = new JButton("Cadastrar Filme");
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFCadastrarFilme cf = new JFCadastrarFilme();
+				cf.setVisible(true);
+				readJTable();
+			}
+		});
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnCadastrar.setBounds(10, 330, 139, 30);
 		contentPane.add(btnCadastrar);
@@ -88,7 +104,7 @@ public class JFListarFilmes extends JFrame {
 			}
 		});
 		btnAlterar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnAlterar.setBounds(175, 330, 111, 30);
+		btnAlterar.setBounds(158, 330, 111, 30);
 		contentPane.add(btnAlterar);
 		
 		JButton btnExcluir = new JButton("Excluir Filme");
@@ -111,7 +127,7 @@ public class JFListarFilmes extends JFrame {
 			}
 		});
 		btnExcluir.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnExcluir.setBounds(296, 330, 111, 30);
+		btnExcluir.setBounds(279, 330, 111, 30);
 		contentPane.add(btnExcluir);
 		
 		readJTable();

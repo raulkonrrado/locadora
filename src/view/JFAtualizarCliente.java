@@ -49,7 +49,7 @@ public class JFAtualizarCliente extends JFrame {
 	 * Create the frame.
 	 */
 	public JFAtualizarCliente(int id) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -99,12 +99,12 @@ public class JFAtualizarCliente extends JFrame {
 		
 		JRadioButton rdbtnFeminino = new JRadioButton("Feminino");
 		rdbtnFeminino.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		rdbtnFeminino.setBounds(74, 152, 79, 23);
+		rdbtnFeminino.setBounds(163, 152, 79, 23);
 		contentPane.add(rdbtnFeminino);
 		
 		JRadioButton rdbtnMasculino = new JRadioButton("Masculino");
 		rdbtnMasculino.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		rdbtnMasculino.setBounds(155, 152, 87, 23);
+		rdbtnMasculino.setBounds(74, 152, 87, 23);
 		contentPane.add(rdbtnMasculino);
 		
 		ButtonGroup sexo = new ButtonGroup();
@@ -112,13 +112,25 @@ public class JFAtualizarCliente extends JFrame {
 		sexo.add(rdbtnMasculino);
 		
 		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					txtNome.setText(null);
+					txtEmail.setText(null);
+					sexo.clearSelection();
+			}
+		});
 		btnLimpar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnLimpar.setBounds(244, 210, 89, 30);
+		btnLimpar.setBounds(228, 210, 89, 30);
 		contentPane.add(btnLimpar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnCancelar.setBounds(143, 210, 89, 30);
+		btnCancelar.setBounds(129, 210, 89, 30);
 		contentPane.add(btnCancelar);
 		
 		lblId.setText(String.valueOf(c.getIdCliente()));
@@ -148,6 +160,7 @@ public class JFAtualizarCliente extends JFrame {
 				}
 				
 				dao.update(c);
+				dispose();
 			}
 		});
 		
